@@ -40,7 +40,7 @@
     "SIGN": {
         "message": < Message >,
         "publicKey": < Your public key >,
-        "signature": < Your public key >
+        "signature": < The signature on message >
     }
 }
 ```
