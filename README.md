@@ -10,9 +10,11 @@
 ### To revoke a PKI: 
 **Post** http://localhost:45204/api/pki/revoke  
 ***With a body of the following form:***
+```json
 {
-    "publicKey" : <The public key needs to be revoked>
+    "publicKey" : < The public key needs to be revoked >
 }
+```
 ***Example:***
 ![alt text](./img/img1.png)
 
@@ -21,20 +23,26 @@
 ***With a body of the following form:***
 ```json
 {
-    "message" : <Thông điệp cần ký>,
-    "publicKey": <Khóa công khai>,
-    "privateKey": <Khóa bí mật>
+    "message" : < Message to sign >,
+    "publicKey": < Your public key >,
+    "privateKey": < Your private key >
 }
 ```
+***Example:***
+![alt text](./img/sign.png)
+***The result returned when signing successfully will be in the form:***
+![alt text](./img/result.png)
 ### To verify the signature on a message
 **Post** http://localhost:45204/api/pki/verify  
 ***With a body of the following form:***
 ```json
 {
     "SIGN": {
-        "message": <Thông điệp>,
-        "publicKey": <Khóa công khai>,
-        "signature": <Chữ ký trên thông điệp>
+        "message": < Message >,
+        "publicKey": < Your public key >,
+        "signature": < Your public key >
     }
 }
 ```
+***Example:***
+![alt text](./img/verify.png)
