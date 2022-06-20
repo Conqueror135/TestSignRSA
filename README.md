@@ -1,51 +1,66 @@
 ## The steps to run the app:
+
 - npm install
 - npm start
 
 ## THE APIS:
 
-### APIs that User account type is allowed to use
 #### To register an account
+
 **Post** http://localhost:45204/api/app/register
-***With a body of the following form:***
+**_With a body of the following form:_**
+
 ```json
 {
     "username" : < The username to register >,
     "password": < The password to resgister >,
 }
 ```
-#### To login 
+
+#### To login
+
 **Post** http://localhost:45204/api/app/login
-***With a body of the following form:***
+**_With a body of the following form:_**
+
 ```json
 {
     "username" : < The username to login >,
     "password": < The password to login >,
 }
 ```
-***The result returned when login successfully will be in the form:***
+
+**_The result returned when login successfully will be in the form:_**
+
 ```json
 {
     "accessToken" : < The token to use to determine access rights >,
     "refreshToken": < The token to use to refresh tokens upon expiration>,
 }
 ```
+
 #### To refresh a token
+
 **Post** http://localhost:45204/api/app/refreshToken
+
 ```json
 {
     "refreshToken": < Your refresh token >
 }
 ```
-#### Note: The api below all need to send with the token received after login to have access!
 
+### APIs that User account type is allowed to use
 
-#### To create new a PKI: 
+- #### Note: The api below all need to send with the token received after login to have access! +
+
+#### To create new a PKI:
+
 **Get** http://localhost:45204/api/pki/createPKI
 
-#### To sign a message: 
-**Post** http://localhost:45204/api/pki/sign 
-***With a body of the following form:***
+#### To sign a message:
+
+**Post** http://localhost:45204/api/pki/sign
+**_With a body of the following form:_**
+
 ```json
 {
     "message" : < Message to sign >,
@@ -53,14 +68,17 @@
     "privateKey": < Your private key >
 }
 ```
-***Example:***
+
+**_Example:_**
 ![alt text](./img/sign.png)
-***The result returned when signing successfully will be in the form:***
+**_The result returned when signing successfully will be in the form:_**
 ![alt text](./img/result.png)
 
 #### To verify the signature on a message
+
 **Post** http://localhost:45204/api/pki/verify  
-***With a body of the following form:***
+**_With a body of the following form:_**
+
 ```json
 {
     "SIGN": {
@@ -70,31 +88,38 @@
     }
 }
 ```
-***Example:***
+
+**_Example:_**
 ![alt text](./img/verify.png)
 
-
 ### APIs that only the Administrator account type is allowed to use
+
 #### To get list user
+
 **Get** http://localhost:45204/api/user/getUsers
 
 #### To modify permission of an user
+
 **Post** http://localhost:45204/api/user/mRole
 
 #### To delete an user
-**Post**  http://localhost:45204/api/user/delete/ + < Id of the user to delete >
 
-#### To get list of PKIs: 
+**Post** http://localhost:45204/api/user/delete/ + < Id of the user to delete >
+
+#### To get list of PKIs:
+
 **Get** http://localhost:45204/api/pki/getAll
 
-#### To revoke a PKI: 
+#### To revoke a PKI:
+
 **Post** http://localhost:45204/api/pki/revoke  
-***With a body of the following form:***
+**_With a body of the following form:_**
+
 ```json
 {
     "publicKey" : < The public key needs to be revoked >
 }
 ```
-***Example:***
-![alt text](./img/img1.png)
 
+**_Example:_**
+![alt text](./img/img1.png)
