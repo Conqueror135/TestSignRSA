@@ -1,6 +1,7 @@
 const jwtHelper = require("../helpers/jwt.helper");
+require('dotenv').config()
 const accessTokenSecret =
-  process.env.ACCESS_TOKEN_SECRET || "Thang_Dep_Trai_Khong_Ai_Sanh_Bang_:))";
+  process.env.ACCESS_TOKEN_SECRET;
 
 let isAuth = async (req, res, next) => {
   const tokenFromClient =

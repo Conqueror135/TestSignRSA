@@ -1,22 +1,29 @@
 const md5 = require("md5");
 const { getByUsername, save } = require("../models/userModel");
 const jwtHelper = require("../helpers/jwt.helper");
+const checkParam = require("../utils/checkParam");
+require('dotenv').config()
 
 let tokenList = {};
 
-const accessTokenLife = process.env.ACCESS_TOKEN_LIFE || "1h";
+const accessTokenLife = process.env.ACCESS_TOKEN_LIFE;
 const accessTokenSecret =
-  process.env.ACCESS_TOKEN_SECRET || "Thang_Dep_Trai_Khong_Ai_Sanh_Bang_:))";
-const refreshTokenLife = process.env.REFRESH_TOKEN_LIFE || "3650d";
+  process.env.ACCESS_TOKEN_SECRET;
+const refreshTokenLife = process.env.REFRESH_TOKEN_LIFE;
 const refreshTokenSecret =
-  process.env.ACCESS_TOKEN_SECRET || "Thang_Dep_Trai_Khong_Ai_Sanh_Bang_:))";
+  process.env.ACCESS_TOKEN_SECRET ;
 
 let login = async (req, res) => {
+  const isvalid=checkParam.checkUserNamePassword(req,res);
+  if(!isvalid)
+  return;
+  const body = req.body;
+
+  const username = body.user.username;
+  const password = body.user.password;
   try {
-    const body = req.body;
-    const username = body.username;
-    const password = body.password;
     const encodePassword = md5(password);
+    
     const user = await getByUsername(username);
     if (user) {
       if (user.password === encodePassword) {
